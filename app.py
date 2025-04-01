@@ -45,6 +45,7 @@ def connect_database():
     except psycopg2.Error as e:
         logging.error(f"Error al conectar con la base de datos: {e}")
         raise e
+    
 def embbed_question(text):
     return model.encode(text)
 
@@ -90,9 +91,6 @@ async def submit_data(data: InputData):
             ### PREGUNTA DEL USUARIO:
             {question}
 
-            ### FRAGMENTOS DE TEXTO DE DOCUMENTOS:
-            Los siguientes fragmentos de texto provienen de diferentes documentos y están separados por saltos de línea. Cada fragmento puede contener información relevante para responder a la pregunta del usuario. {documents_array}
-
             ### INSTRUCCIONES:
             - Usa únicamente el contexto proporcionado para responder.  
             - Sé directo y claro en la respuesta.  
@@ -104,6 +102,7 @@ async def submit_data(data: InputData):
                 model="open-mistral-nemo",
                 messages=[{"role": "user", "content": prompt}]
             )
+            print("prompt:" , prompt)
             response_content = chat_response.choices[0].message.content
             print("response_content: ",response_content)
 

@@ -157,6 +157,7 @@ def procesar_pdfs(archivos):
         filename = archivo['filename']
 
         source_path = os.path.join(MOODLE_DATA_PATH, contenthash[:2], contenthash[2:4], contenthash)
+        print(source_path)
         temp_pdf_path = os.path.join(TEMP_PDF_FOLDER, filename)
 
         if os.path.exists(source_path):
@@ -195,7 +196,6 @@ def load_and_divide_document(file_path, doc_name):
                 for obj in page_objs:
                     text_fragment = obj.get("text", "").strip()
                     font_size = obj.get("size", 0)
-                    print(f"Font size: {font_size}")  # Verifica los tamaños de las fuentes
                     
                     if len(text_fragment) < min_characters:
                         continue
